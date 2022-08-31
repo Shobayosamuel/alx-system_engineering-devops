@@ -1,2 +1,1 @@
-current working directory
-listing
+list hidden files
