@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Display the files in the current working directory
-
+# displays the part of the name after the first dash
+.
 lis=$(ls)
 for i in $lis;
 do
