@@ -1,2 +1,2 @@
 #!/bin/bash
-head -n 15 /etc/passwd
+cat /etc/passwd | head

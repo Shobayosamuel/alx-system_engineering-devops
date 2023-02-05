@@ -1,3 +1,1 @@
-betty
-print
-groups belong
+**This a short project on Shell Permissions**
