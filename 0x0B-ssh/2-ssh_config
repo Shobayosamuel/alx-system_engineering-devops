@@ -1,4 +1,5 @@
-Host school
+# ssh config file
+Host *
     Hostname 54.224.46.242
     User ubuntu
     IdentityFile ~/.ssh/school
