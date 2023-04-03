@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Install and configure Nginx web server on two servers with custom headers and pages
+
+# Update package manager
+sudo apt-get update
+
+# Install Nginx web server
+sudo apt-get install nginx -y
+
+# Create a hello world page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Create a redirection for our website
+sudo sed -i '/server_name _;/a \	location /redirect_me {\n		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n	}' /etc/nginx/sites-available/default
+
+# Create a custom 404 page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+
+# Configure Nginx to use the custom 404 page
+sudo sed -i '/server_name _;/a \        error_page 404 /custom_404.html;\n        location = /custom_404.html {\n                internal;\n        }' /etc/nginx/sites-available/default
+
+# Get the hostname of the server and store it in a variable
+HOSTNAME=$(hostname)
+
+# Add custom header configuration to Nginx
+sudo sed -i "/^http {/a \    add_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
+
+# Restart the Nginx service after updating the settings
+sudo service nginx restart
