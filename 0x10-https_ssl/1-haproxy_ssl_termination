@@ -7,7 +7,8 @@ global
         user haproxy
         group haproxy
         daemon
-
+        maxconn 2048
+        tune.ssl.default-dh-param 2048
         # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
@@ -25,6 +26,8 @@ defaults
         timeout connect 5000
         timeout client  50000
         timeout server  50000
+        option forwardfor
+        option http-server-close
         errorfile 400 /etc/haproxy/errors/400.http
         errorfile 403 /etc/haproxy/errors/403.http
         errorfile 408 /etc/haproxy/errors/408.http
@@ -35,14 +38,14 @@ defaults
 
 frontend  my-frontend-http
         bind *:80
-	mode http
+        mode http
         http-request set-header X-Forwarded-Proto http
-	default_backend my-backend
+        default_backend my-backend
 
 frontend  my-frontend-https
         bind *:443 ssl crt /etc/haproxy/certs/www.futuretechie.tech.pem
         http-request set-header X-Forwarded-Proto https
-        default_backend my_backend
+        default_backend my-backend
 
 backend my-backend
         balance roundrobin
