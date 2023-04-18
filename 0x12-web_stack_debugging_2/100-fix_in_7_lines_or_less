@@ -1,15 +1,7 @@
 #!/usr/bin/env bash
 # Stop the nginx service if it's already running
 service nginx stop
-
 # Update the nginx.conf file to run nginx as the nginx user
 sed -i 's/user\s*root;/user nginx;/' /etc/nginx/nginx.conf
-
-# Update the ownership of the nginx directories to the nginx user
 chown -R nginx:nginx /var/lib/nginx /var/log/nginx
-
-# Update the permissions of the nginx directories
-chmod -R 755 /var/lib/nginx /var/log/nginx
-
-# Start the nginx service
 service nginx start
