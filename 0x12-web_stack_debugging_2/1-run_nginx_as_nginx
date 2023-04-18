@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # fix container
-service nginx stop
-sed -i 's/user\s*root;/user nginx;/' /etc/nginx/nginx.conf
-chown -R nginx:nginx /var/lib/nginx /var/log/nginx
-chmod -R 644 /var/lib/nginx /var/log/nginx
-service nginx start
+pkill -f apache2
+chmod 644 /etc/nginx/nginx.conf
+sed -i "1i user nginx;" /etc/nginx/nginx.conf
+sed -i 's/80/8080/' /etc/nginx/sites-enabled/default
+sudo -u nginx service nginx restart
