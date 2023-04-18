@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Stop the nginx service if it's already running
-service nginx stop
-# Update the nginx.conf file to run nginx as the nginx user
-sed -i 's/user\s*root;/user nginx;/' /etc/nginx/nginx.conf
-chown -R nginx:nginx /var/lib/nginx /var/log/nginx
-service nginx start
+# fix container with fewer lines
+pkill -f apache2
+chmod 644 /etc/nginx/nginx.conf
+sed -Ei 's/\s*#?\s*user .*/user nginx;/' /etc/nginx/nginx.conf
+sed -Ei 's/(listen (\[::\]:)?80) /\180 /' /etc/nginx/sites-enabled/default
+sudo -u nginx service nginx restart
