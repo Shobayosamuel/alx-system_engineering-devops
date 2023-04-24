@@ -5,18 +5,19 @@
     list progress.
 """
 
+
 import requests
 import sys
 
 
 if __name__ == "__main__":
-    employeeID = sys.argv[1]
+    employee_id = sys.argv[1]
     base_url = "https://jsonplaceholder.typicode.com/users"
-    url = base_url + '/' + employeeID
+    url = f"{base_url}/{employee_id}"
     response = requests.get(url)
     employee_name = response.json().get('name')
 
-    todos_url = url + '/todos'
+    todos_url = f"{url}/todos"
     response = requests.get(todos_url)
     tasks = response.json()
     done_tasks_no = 0
@@ -27,8 +28,8 @@ if __name__ == "__main__":
             done_tasks.append(task)
             done_tasks_no += 1
 
-    print(f"Employee {employee_name} is done with tasks"
+    print(f"Employee {employee_name} is done with tasks "
           f"({done_tasks_no}/{len(tasks)}):")
 
     for line in done_tasks:
-        print("\t {}".format(line.get('title')))
+        print(f"\t{line.get('title')}")
