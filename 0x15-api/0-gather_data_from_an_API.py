@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 """
-    Python script that, using this REST API, for a given
-    employee ID, returns information about his/her TODO
-    list progress.
+Retrieves and displays information about a given employee's TODO list
+progress using the JSONPlaceholder API.
 """
-
 
 import requests
 import sys
