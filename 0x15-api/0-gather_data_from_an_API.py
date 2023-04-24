@@ -11,11 +11,11 @@ import sys
 if __name__ == "__main__":
     employee_id = sys.argv[1]
     base_url = "https://jsonplaceholder.typicode.com/users"
-    url = f"{base_url}/{employee_id}"
+    url = "{}/{}".format(base_url, employee_id)
     response = requests.get(url)
     employee_name = response.json().get('name')
 
-    todos_url = f"{url}/todos"
+    todos_url = "{}/todos".format(url)
     response = requests.get(todos_url)
     tasks = response.json()
     done_tasks_no = 0
@@ -26,8 +26,8 @@ if __name__ == "__main__":
             done_tasks.append(task)
             done_tasks_no += 1
 
-    print(f"Employee {employee_name} is done with tasks "
-          f"({done_tasks_no}/{len(tasks)}):")
+    print("Employee {} is done with tasks ({}/{}):"
+          .format(employee_name, done_tasks_no, len(tasks)))
 
     for line in done_tasks:
-        print(f"\t{line.get('title')}")
+        print("\t{}".format(line.get('title')))
