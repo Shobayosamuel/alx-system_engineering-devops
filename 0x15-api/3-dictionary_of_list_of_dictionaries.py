@@ -17,7 +17,7 @@ if __name__ == "__main__":
     for user in users:
         employee_id = user.get('id')
         employee_name = user.get('name')
-        todos_url = f"{base_url}/{employee_id}/todos"
+        todos_url = "{}/{}/todos".format(base_url, employee_id)
         response = requests.get(todos_url)
         tasks = response.json()
         task_list = []
