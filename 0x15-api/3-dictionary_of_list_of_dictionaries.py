@@ -30,5 +30,5 @@ if __name__ == '__main__':
                 "completed": task.get('completed'),
                 "username": username
             })
-    with open(f"{user_id}.json", 'w') as file:
+    with open("{}.json".format(user_id), 'w') as file:
         json.dump(dictionary, file)
