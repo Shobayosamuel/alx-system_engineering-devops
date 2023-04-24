@@ -4,8 +4,9 @@
     employee ID, returns information about his/her TODO
     list progress.
 """
-import sys
+
 import requests
+import sys
 
 
 if __name__ == "__main__":
@@ -25,6 +26,7 @@ if __name__ == "__main__":
         if task.get('completed'):
             done_tasks.append(task)
             done_tasks_no += 1
+
     print(f"Employee {employee_name} is done with tasks"
           f"({done_tasks_no}/{len(tasks)}):")
 
