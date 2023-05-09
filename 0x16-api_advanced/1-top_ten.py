@@ -8,7 +8,7 @@ import requests
 def top_ten(subreddit):
     """returns the title of the topten posts for a given subreddit"""
     if subreddit is None or not isinstance(subreddit, str):
-        return None
+        print('None')
     url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
     headers = {'User-Agent': '0x16-api_advanced:project:v1.0.0'}
     response = requests.get(url, headers=headers, allow_redirects=False)
@@ -18,4 +18,4 @@ def top_ten(subreddit):
             title = data[i]['data']['title']
             print(title)
     else:
-        return None
+        print('None')
